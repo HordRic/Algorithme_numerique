@@ -13,7 +13,8 @@ def masecante(f, a, b, epsilon, nmax):
         z = x1 - f(x1) * (x1 - x0) / (f(x1) - f(x0))  # Calculer x_n+1
         # mise à jour des 2 points successifs x0 et x1
         x0 = x1  # jouera le rôle de x_n au prochain coup
-        x1 = z  # jouera le rôle de x_n+1$   # incrémentation du nombre d'itérations
+        x1 = z  # jouera le rôle de x_n+1
+        # incrémentation du nombre d'itérations
         niter += 1
     # convergence ou pas
     if niter == nmax:
@@ -76,16 +77,20 @@ def main():
         while True:
             try:
                 epsilon = float(input("Entrez la précision epsilon : "))
+                if epsilon <= 0:
+                    raise ValueError("La précision epsilon doit être supérieure à 0.")
                 break
-            except ValueError:
-                print("Veuillez entrer un nombre réel valide pour la précision.")
+            except ValueError as e:
+                print(f"Erreur : {e}. Veuillez entrer un nombre réel valide pour la précision.")
                 
         while True:
             try:
                 nmax = int(input("Entrez le nombre maximum d'itérations : "))
+                if nmax <= 0:
+                    raise ValueError("Le nombre maximum d'itérations doit être supérieur à 0.")
                 break
-            except ValueError:
-                print("Veuillez entrer un nombre entier valide pour le nombre maximum d'itérations.")
+            except ValueError as e:
+                print(f"Erreur : {e}. Veuillez entrer un nombre entier valide pour le nombre maximum d'itérations.")
 
         # Calculer la solution
         try:
