@@ -1,29 +1,42 @@
 import numpy as np
-import sympy as sp
 import math
 import matplotlib.pyplot as plt
 
-
-def balayage(f, a, pas, distance):
+def dichotomie(f, a, b, precision, nmax):
     """
-    Méthode de balayage pour trouver l'intervalle contenant la racine de f(x) = 0.
+    Méthode de dichotomie pour trouver une solution à l'équation f(x) = 0.
+
     Args:
-        f (function): La fonction dont on cherche la racine.
-        a (float): La borne inférieure de la plage de recherche.
-        pas (float): La taille de chaque intervalle pour le balayage.
-        distance (float): La distance totale de balayage à partir de la borne inférieure.
-    Returns:
-        list: Liste des intervalles où la fonction change de signe.
-    """
-    intervalles = []
-    b = a + distance
-    x = a
-    while x < b:
-        if f(x) * f(x + pas) < 0:
-            intervalles.append((x, x + pas))
-        x += pas
-    return intervalles
+        f (function): La fonction à résoudre.
+        a (float): La borne inférieure de l'intervalle de recherche.
+        b (float): La borne supérieure de l'intervalle de recherche.
+        precision (float): La précision souhaitée pour la solution.
+        nmax (int): Le nombre maximum d'itérations.
 
+    Returns:
+        float: La solution à l'équation f(x) = 0.
+    """
+    # Initialiser les variables
+    Xg = a
+    Xd = b
+    sol = 0
+
+    # Vérification des conditions initiales
+    if f(a) * f(b) > 0:
+        raise ValueError("f(a) et f(b) sont de même signe, donc impossible d'utiliser TVI")
+
+    # Boucle jusqu'à ce que la précision soit atteinte ou que le nombre maximal d'itérations soit atteint
+    niter = 0
+    while abs(Xd - Xg) > precision and niter < nmax:
+        Xm = (Xg + Xd) / 2
+        if f(Xg) * f(Xm) < 0:
+            Xd = Xm
+        else:
+            Xg = Xm
+        niter += 1
+
+    sol = (Xg + Xd) / 2
+    return sol
 
 def get_user_function():
     """
@@ -36,7 +49,7 @@ def get_user_function():
             print(" - Racine carrée : 'np.sqrt(x) - 2'")
             print(" - Usuelle : 'x**3 - x**2 + x - 1'")
             print(" - Trigonométriques : 'np.sin(x)', 'np.cos(x)', 'np.tan(x)'")
-            print(" - Exponentielle: 'np.exp(x) - 2' ")
+            print(" - Logarithme naturel (ln) : 'np.log(x)'")
 
             func_str = input("Entrez la fonction f(x) en termes de 'x' : ")
 
@@ -46,13 +59,8 @@ def get_user_function():
                 elif 'np.sqrt' in func_str and x < 0:
                     raise ValueError("La racine carrée n'est définie que pour les valeurs positives ou nulles.")
                 elif ('np.sin' in func_str or 'np.cos' in func_str or 'np.tan' in func_str or
-                      'math.sin' in func_str or 'math.cos' in func_str or 'math.tan' in func_str) and not isinstance(x,
-                                                                                                                     (
-                                                                                                                     int,
-                                                                                                                     float)):
+                      'math.sin' in func_str or 'math.cos' in func_str or 'math.tan' in func_str) and not isinstance(x, (int, float)):
                     raise ValueError("Les fonctions trigonométriques nécessitent une valeur numérique.")
-                elif 'np.exp' in func_str and not isinstance(x, (int, float)):
-                    raise ValueError("La fonction exponentielle nécessite une valeur numérique.")
                 return eval(func_str, {"np": np, "math": math, "x": x, "__builtins__": {}})
 
             # Tester la fonction pour s'assurer qu'elle est valide
@@ -61,7 +69,6 @@ def get_user_function():
         except Exception as e:
             print(f"Erreur dans la fonction : {e}. Veuillez réessayer.")
     return f
-
 
 def main():
     while True:
@@ -72,38 +79,45 @@ def main():
         while True:
             try:
                 a = float(input("Entrez la borne inférieure a : "))
+                print(type(a))
                 break
             except ValueError:
                 print("Veuillez entrer un nombre réel valide pour a.")
+        while True:
+            try:
+                b = float(input("Entrez la borne supérieure b : "))
+                if b <= a:
+                    raise ValueError("La borne supérieure doit être supérieure à la borne inférieure.")
+                break
+            except ValueError as e:
+                print(f"Erreur : {e}. Veuillez entrer un nombre réel valide pour b.")
 
         while True:
             try:
-                pas = float(input("Entrez la taille du pas de balayage : "))
+                precision = float(input("Entrez la précision : "))
                 break
             except ValueError:
-                print("Veuillez entrer un nombre réel positif pour la taille du pas de balayage.")
+                print("Veuillez entrer un nombre réel valide pour la précision.")
 
         while True:
             try:
-                distance = float(input("Entrez la distance de balayage : "))
+                nmax = int(input("Entrez le nombre maximum d'itérations : "))
                 break
             except ValueError:
-                print("Veuillez entrer un nombre réel positif pour la distance de balayage.")
+                print("Veuillez entrer un nombre entier valide pour le nombre maximum d'itérations.")
 
-        # Recherche des intervalles
-        intervalles = balayage(user_function, a, pas, distance)
-        if intervalles:
-            print("Les intervalles où la fonction change de signe sont :")
-            for intervalle in intervalles:
-                print(intervalle)
-        else:
-            print("Aucun changement de signe détecté dans l'intervalle donné.")
+        # Calcule de la solution
+        try:
+            solution = dichotomie(user_function, a, b, precision, nmax)
+            print("La solution est :", solution)
+        except ValueError as e:
+            print(f"Erreur lors du calcul de la solution : {e}. Veuillez vérifier vos bornes et réessayer.")
+            continue
 
         # Demander à l'utilisateur s'il veut recommencer
         retry = input("Voulez-vous recommencer? (oui/non) : ").strip().lower()
         if retry != 'oui':
             break
-
 
 if __name__ == "__main__":
     main()

@@ -95,7 +95,7 @@ def main():
         if intervalles:
             print("Les intervalles où la fonction change de signe sont :")
             for intervalle in intervalles:
-                print(intervalle)
+                print( intervalle)
         else:
             print("Aucun changement de signe détecté dans l'intervalle donné.")
 
