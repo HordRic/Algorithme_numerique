@@ -1,6 +1,7 @@
 import numpy as np
 import math
 import matplotlib.pyplot as plt
+import sympy as sp
 
 def dichotomie(f, a, b, precision, nmax):
     """
@@ -14,7 +15,7 @@ def dichotomie(f, a, b, precision, nmax):
         nmax (int): Le nombre maximum d'itérations.
 
     Returns:
-        float: La solution à l'équation f(x) = 0.
+        tuple: La solution à l'équation f(x) = 0 et le nombre d'itérations.
     """
     # Initialiser les variables
     Xg = a
@@ -36,7 +37,7 @@ def dichotomie(f, a, b, precision, nmax):
         niter += 1
 
     sol = (Xg + Xd) / 2
-    return sol
+    return sol, niter
 
 def get_user_function():
     """
@@ -56,8 +57,6 @@ def get_user_function():
             def f(x):
                 if ('np.log' in func_str or 'np.log10' in func_str or 'math.log' in func_str) and x <= 0:
                     raise ValueError("Le logarithme n'est défini que pour les valeurs positives.")
-                elif 'np.sqrt' in func_str and x < 0:
-                    raise ValueError("La racine carrée n'est définie que pour les valeurs positives ou nulles.")
                 elif ('np.sin' in func_str or 'np.cos' in func_str or 'np.tan' in func_str or
                       'math.sin' in func_str or 'math.cos' in func_str or 'math.tan' in func_str) and not isinstance(x, (int, float)):
                     raise ValueError("Les fonctions trigonométriques nécessitent une valeur numérique.")
@@ -108,8 +107,9 @@ def main():
 
         # Calcule de la solution
         try:
-            solution = dichotomie(user_function, a, b, precision, nmax)
+            solution, iterations = dichotomie(user_function, a, b, precision, nmax)
             print("La solution est :", solution)
+            print("Nombre d'itérations :", iterations)
         except ValueError as e:
             print(f"Erreur lors du calcul de la solution : {e}. Veuillez vérifier vos bornes et réessayer.")
             continue

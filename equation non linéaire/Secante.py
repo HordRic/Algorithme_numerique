@@ -39,8 +39,6 @@ def get_user_function():
             def f(x):
                 if ('np.log' in func_str or 'np.log10' in func_str or 'math.log' in func_str) and x <= 0:
                     raise ValueError("Le logarithme n'est défini que pour les valeurs positives.")
-                elif 'np.sqrt' in func_str and x < 0:
-                    raise ValueError("La racine carrée n'est définie que pour les valeurs positives ou nulles.")
                 elif ('np.sin' in func_str or 'np.cos' in func_str or 'np.tan' in func_str or 
                       'math.sin' in func_str or 'math.cos' in func_str or 'math.tan' in func_str) and not isinstance(x, (int, float)):
                     raise ValueError("Les fonctions trigonométriques nécessitent une valeur numérique.")
