@@ -1,5 +1,3 @@
-Voici le README mis à jour pour inclure les nouvelles méthodes que vous avez ajoutées :
-
 # AlgorithmeNumerique
 
 ## Description
@@ -53,57 +51,50 @@ L'utilisateur peut choisir parmi les méthodes de Dichotomie, Newton, Sécante, 
 
 Voici quelques exemples de fonctions que vous pouvez utiliser :
 - Logarithmique : 
-
-np.log(x) + x**2 - 4
-
+  \[
+  \ln(x) + x^2 - 4
+  \]
 
 - Racine carrée : 
-
-np.sqrt(x) - 2
-
+  \[
+  \sqrt{x} - 2
+  \]
 
 - Usuelle : 
+  \[
+  x^3 - x^2 + x - 1
+  \]
 
-x**3 - x**2 + x - 1
+- Trigonométriques :
+  \[
+  \sin(x), \cos(x), \tan(x)
+  \]
 
+### 3. Exemples de Systèmes d'Équations Linéaires
 
-- Trigonométriques : 
-
-np.sin(x)
-
-, 
-
-np.cos(x)
-
-, 
-
-np.tan(x)
-
-
-
-### 3. Exemples de Matrices
-
-Voici quelques exemples de matrices que vous pouvez utiliser pour vérifier les méthodes de résolution des systèmes d'équations linéaires :
+Voici quelques exemples de systèmes d'équations linéaires que vous pouvez utiliser pour vérifier les méthodes de résolution :
 
 #### Décomposition de Cholesky
-```python
-A = np.array([
-    [4, 1, 1],
-    [1, 3, 1],
-    [1, 1, 2]
-], dtype=float)
-b = np.array([1, 2, 3], dtype=float)
-```
+Pour la matrice \( A \) et le vecteur \( b \) suivants :
+
+\[
+\begin{cases}
+4x_1 + x_2 + x_3 = 1 \\
+x_1 + 3x_2 + x_3 = 2 \\
+x_1 + x_2 + 2x_3 = 3
+\end{cases}
+\]
 
 #### Décomposition LU
-```python
-A = np.array([
-    [3, 1, 6],
-    [2, 1, 3],
-    [1, 1, 1]
-], dtype=float)
-b = np.array([12, 7, 3], dtype=float)
-```
+Pour la matrice \( A \) et le vecteur \( b \) suivants :
+
+\[
+\begin{cases}
+3x_1 + x_2 + 6x_3 = 12 \\
+2x_1 + x_2 + 3x_3 = 7 \\
+x_1 + x_2 + x_3 = 3
+\end{cases}
+\]
 
 ## Disclaimer of Warranty
 
