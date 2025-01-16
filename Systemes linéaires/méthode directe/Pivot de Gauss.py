@@ -3,7 +3,7 @@ import numpy as np
 
 def pivot_gauss(A, b):
     """
-    Résout le système d'équations linéaires Ax = b en utilisant l'algorithme du pivot de Gauss.
+    Résoudre le système d'équations linéaires Ax = b en utilisant l'algorithme du pivot de Gauss.
     Args:
         A (numpy.ndarray): Matrice des coefficients.
         b (numpy.ndarray): Vecteur des constantes.

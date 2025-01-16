@@ -77,32 +77,6 @@ np.cos(x)
 
 np.tan(x)
 
-
-
-### 3. Exemples de Matrices
-
-Voici quelques exemples de matrices que vous pouvez utiliser pour vérifier les méthodes de résolution des systèmes d'équations linéaires :
-
-#### Décomposition de Cholesky
-```python
-A = np.array([
-    [4, 1, 1],
-    [1, 3, 1],
-    [1, 1, 2]
-], dtype=float)
-b = np.array([1, 2, 3], dtype=float)
-```
-
-#### Décomposition LU
-```python
-A = np.array([
-    [3, 1, 6],
-    [2, 1, 3],
-    [1, 1, 1]
-], dtype=float)
-b = np.array([12, 7, 3], dtype=float)
-```
-
 ## Disclaimer of Warranty
 
 IL N'Y A PAS DE GARANTIE POUR LE PROGRAMME, DANS LA MESURE PERMISE PAR LA LOI APPLICABLE. LE RISQUE ENTIER CONCERNANT LA QUALITÉ ET LES PERFORMANCES DU PROGRAMME VOUS INCOMBE. SI LE PROGRAMME S'AVÈRE DÉFECTUEUX, VOUS ASSUMEZ LE COÛT DE TOUS LES SERVICES, RÉPARATIONS OU CORRECTIONS NÉCESSAIRES. L'ENTRETIEN, LA RÉPARATION OU LA CORRECTION NÉCESSAIRES SONT BIENVENUES.

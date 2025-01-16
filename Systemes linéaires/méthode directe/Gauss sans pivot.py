@@ -3,7 +3,7 @@ import numpy as np
 
 def gauss_sans_pivot(A, b):
     """
-    Résout le système d'équations linéaires Ax = b en utilisant l'algorithme de Gauss sans pivot.
+    Résoudre le système d'équations linéaires Ax = b en utilisant l'algorithme de Gauss sans pivot.
     Args:
         A (numpy.ndarray): Matrice des coefficients.
         b (numpy.ndarray): Vecteur des constantes.

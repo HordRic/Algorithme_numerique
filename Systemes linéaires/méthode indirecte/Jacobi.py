@@ -2,7 +2,7 @@ import numpy as np
 
 def jacobi(A, b, x0, tol, max_iter):
     """
-    Résout le système d'équations linéaires Ax = b en utilisant la méthode de Jacobi.
+    Résoudre le système d'équations linéaires Ax = b en utilisant la méthode de Jacobi.
     Args:
         A (numpy.ndarray): Matrice des coefficients.
         b (numpy.ndarray): Vecteur des constantes.

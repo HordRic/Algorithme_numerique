@@ -3,7 +3,7 @@ from scipy.linalg import cholesky
 
 def cholesky_decomposition(A, b):
     """
-    Résout le système d'équations linéaires Ax = b en utilisant la décomposition de Cholesky.
+    Résoudre le système d'équations linéaires Ax = b en utilisant la décomposition de Cholesky.
     Args:
         A (numpy.ndarray): Matrice des coefficients.
         b (numpy.ndarray): Vecteur des constantes.
